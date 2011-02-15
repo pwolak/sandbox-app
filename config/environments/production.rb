@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Sandbox::Application.configure do
+=======
+SandboxApp::Application.configure do
+>>>>>>> 4313f4632b7fea070ea5b3ede8b1df760b0fe831
   # Settings specified here will take precedence over those in config/application.rb
 
   # The production environment is meant for finished, "live" apps.
