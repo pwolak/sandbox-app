@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 Sandbox::Application.routes.draw do
   resources :products
 
-=======
-SandboxApp::Application.routes.draw do
->>>>>>> 4313f4632b7fea070ea5b3ede8b1df760b0fe831
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
