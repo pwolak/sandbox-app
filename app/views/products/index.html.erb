@@ -1,3 +1,4 @@
+<div id="product-list">
 <h1>Listing products</h1>
 
 <table>
@@ -9,17 +10,24 @@
   </tr>
 
 <% @products.each do |product| %>
-  <tr>
-    <td><%= product.title %></td>
-    <td><%= product.description %></td>
-    <td><%= product.image_url %></td>
-    <td><%= product.price %></td>
-    <td><%= link_to 'Show', product %></td>
-    <td><%= link_to 'Edit', edit_product_path(product) %></td>
-    <td><%= link_to 'Destroy', product, :confirm => 'Are you sure?', :method => :delete %></td>
+  <tr class="<%= cycle('list-line-odd', 'list-line-even')%>">
+    <td><%= image_tag product.image_url, :class => 'list-image' %></td>
+    <td class="list-description">
+      <dl>
+        <dt><%=h product.title %></dt>
+        <dd><%=h truncate(product.description.gsub(/<.*?>/,''), :length => 80) %></dd>
+      </dl>
+    </td>
+    <td class="list-actions">
+      <%= link_to 'Show', product %><br/>
+      <%= link_to 'Edit', edit_product_path(product) %><br/>
+      <%= link_to 'Destroy', product, :confirm => 'Are you sure?', :method => :delete %>
+    </td>
   </tr>
 <% end %>
 </table>
+
+</div>
 
 <br />
 
