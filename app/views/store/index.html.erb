@@ -4,9 +4,10 @@
   <div class="entry">
     <%= image_tag(product.image_url) %>
     <h3><%=h product.title %></h3>
-    <%= product.description %>
+    <%=h product.description.gsub(/<.*?>/,'') %>
     <div class="price-line">
-    <span class="price"><%= product.price %></span>
+      <span class="price"><%= number_to_currency(product.price) %></span>
+      <%= button_to "Add to Cart"%>
     </div>
   </div>
 <% end %>
