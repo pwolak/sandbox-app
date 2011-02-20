@@ -3,9 +3,7 @@
 <html> 
 <head> 
   <title>Pragprog Books Online Store</title> 
-<!-- START:stylesheet --> 
   <%= stylesheet_link_tag "sandbox", :media => "all" %><!-- <label id="code.slt"/> --> 
-<!-- END:stylesheet --> 
 </head> 
 <body id="store"> 
   <div id="banner"> 
@@ -19,8 +17,12 @@
       <a href="http://www..../news">News</a><br /> 
       <a href="http://www..../contact">Contact</a><br /> 
     </div> 
-    <div id="main"> 
-      <%= yield :layout %><!-- <label id="code.sandbox.e.include"/> --> 
+    <div id="main">
+      <% if flash[:notice] -%>
+        <div id="notice"> <%= flash[:notice] %></div>
+      <% end -%>
+
+      <%= yield :layout %> 
     </div> 
   </div> 
 </body> 
