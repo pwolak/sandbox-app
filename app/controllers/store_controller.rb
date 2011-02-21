@@ -9,7 +9,9 @@ class StoreController < ApplicationController
   def add_to_cart
     product = Product.find(params[:id])
     @cart = find_cart
-    @cart.add_product(product)
+    if current_user
+      @cart.add_product(product)
+    end
   rescue ActiveRecord::RecordNotFound
     logger.error("Attempt to access invalid product #{params[:id]}")
     redirect_to_index("Invalid product")
