@@ -1,4 +1,7 @@
 class StoreController < ApplicationController
+
+  helper_method :current_user
+
   def index
     @products =  Product.find_products_for_sale
   end
@@ -25,6 +28,10 @@ private
   def redirect_to_index(msg)
     flash[:notice] = msg
     redirect_to :action => 'index'
+  end
+
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
 end

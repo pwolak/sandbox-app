@@ -12,16 +12,23 @@
   </div> 
   <div id="columns"> 
     <div id="side"> 
-      <a href="http://www....">Home</a><br /> 
+      <a href="/store">Home</a><br /> 
       <a href="http://www..../faq">Questions</a><br /> 
       <a href="http://www..../news">News</a><br /> 
-      <a href="http://www..../contact">Contact</a><br /> 
-    </div> 
+      <a href="http://www..../contact">Contact</a><br />
+      <% if current_user %>
+        <small>Logged in as <%= current_user.email %></small><br />
+        <a href="log_out">Log out</a><br />
+      <% else %>
+         <a href="/log_in">Log in</a><br />
+         <a href="/sign_up">Sign Up!</a><br />
+       <% end %>
+     </div>
+
     <div id="main">
       <% if flash[:notice] -%>
         <div id="notice"> <%= flash[:notice] %></div>
       <% end -%>
-
       <%= yield :layout %> 
     </div> 
   </div> 

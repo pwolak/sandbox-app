@@ -1,11 +1,15 @@
 <div class="cart-title">Your Cart</div> 
-<table> 
-  <% for item in @cart.items %>
-    <tr>
-      <td><%= item.quantity %> &times;</td> 
-      <td><%=h item.title %></td> 
-      <td class="item-price"><%= number_to_currency(item.price) %></td>
-    </tr>
+<table>
+   <% if current_user %> 
+    <% for item in @cart.items %>
+      <tr>
+        <td><%= item.quantity %> &times;</td> 
+        <td><%=h item.title %></td> 
+        <td class="item-price"><%= number_to_currency(item.price) %></td>
+      </tr>
+    <% end %>
+  <% else %>
+    Please log in to add product to your cart.
   <% end %>
 
   <tr class="total-line">
