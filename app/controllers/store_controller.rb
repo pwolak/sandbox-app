@@ -13,7 +13,10 @@ class StoreController < ApplicationController
     if current_user
       @cart.add_product(product)
     end
-    redirect_to_index
+    #redirect_to_index
+    respond_to do |format|
+      format.js
+    end
   rescue ActiveRecord::RecordNotFound
     logger.error("Attempt to access invalid product #{params[:id]}")
     redirect_to_index("Invalid product")
