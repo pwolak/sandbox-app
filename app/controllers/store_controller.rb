@@ -11,9 +11,8 @@ class StoreController < ApplicationController
     product = Product.find(params[:id])
     @cart = find_cart
     if current_user
-      @cart.add_product(product)
+      @current_item = @cart.add_product(product)
     end
-    #redirect_to_index
     respond_to do |format|
       format.js
     end
