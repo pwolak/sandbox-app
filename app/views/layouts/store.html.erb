@@ -21,6 +21,8 @@
       <a href="http://www..../news">News</a><br /> 
       <a href="http://www..../contact">Contact</a><br />
       <% if current_user %>
+        <% email = current_user.email %>
+        <%= gravatar_image_tag email %><br />
         <small>Logged in as <%= current_user.email %></small><br />
         <a href="/log_out">Log out</a><br />
       <% else %>
