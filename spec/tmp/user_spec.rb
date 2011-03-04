@@ -1,5 +1,7 @@
 require "../../app/models/product.rb"
 
+#test
+
 describe Product do
   it "should be invalid without title and description" do
     product = Product.new
