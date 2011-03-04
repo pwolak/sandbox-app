@@ -9,6 +9,10 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 gem "bcrypt-ruby", :require => "bcrypt"
 gem "gravatar_image_tag", "1.0.0.pre2"
 
+group :develpoment do
+  gem "rspec-rails"
+end
+
 
 # Use unicorn as the web server
 # gem 'unicorn'

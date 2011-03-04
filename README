@@ -2,3 +2,14 @@ The awesome Sandbox App.
 Adam - the best programmer - test number x.
 Developed by Pawel and Co.
 Adam Adam
+
+
+Prepare db for testing:
+
+  rake db:test:prepare
+  
+  
+When Gemfile get modified remember to run bundle install!
+
+Testing frameworks:
+  * rspec (rspec spec --format=html, --format=documentation)
