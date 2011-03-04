@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.xml
   def show
-    @product = Product.last
+    @product = Product.first
     @product1 = Product.first
 
     respond_to do |format|
