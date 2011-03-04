@@ -14,6 +14,7 @@ class ProductsController < ApplicationController
   # GET /products/1.xml
   def show
     @product = Product.first
+    @product1 = Product.last
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @product }
