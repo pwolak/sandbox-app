@@ -14,14 +14,6 @@ class Product < ActiveRecord::Base
   
   validate :price_must_be_at_least_a_cent
   
-  def add(a, b)
-    a + b
-  end
-     
-  def substract(a, b)
-    a - b
-  end
-  
 protected
   def price_must_be_at_least_a_cent
     errors.add(:price, 'should be at least 0.01') if price.nil? || price < 0.01
