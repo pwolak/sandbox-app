@@ -58,9 +58,7 @@ describe Product do
         :image_url => "dsa.jpg", 
         :price => 12
       )
-      # ML When the order is not important, arrays should be compared
-      # using =~ (contrary to ==).
-      Product.find_products_for_sale.should =~ [my_product1, my_product2]
+      Product.find_products_for_sale.should == [my_product2, my_product1]
     end
     
   end
