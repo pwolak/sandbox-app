@@ -1,29 +1,56 @@
 require "spec_helper"
 
-describe Product do
+describe User do
 
   before(:each) do
-    @p = Product.new
+    @valid_attributes
   end
   
-  describe "#add" do
-    
-    it "adds two numbers" do
-      @p.add(2, 3).should == 5
+  describe "validates" do
+
+    it "validates presence of password and email" do
+      valid_attributes = {:password => nil, :email => nil}
+      u = User.new(valid_attributes)
+      u.should have(1).error_on(:password)
+      u.should have(1).error_on(:email)
     end
 
-    it "adds 4 to 7" do
-      @p.add(4, 7).should == 11
+    it "validates uniqueness of email" do
+      user1 = User.new(:email => "mailmail@com.pl", :password => "qwer")
+      user1.save
+      user2 = User.new(:email => "mailmail@com.pl", :password => "qwert")
+      user2.save.should be_false
+    end
+
+    it "validates confirmation of password" do
+      user = User.new(:email => "mail@com.pl", :password => "pass")
+      user.password_confirmation = "qwerfdslhf"
+      user.should_not be_valid
+    end
+
+    it "hashes password before save" do
+      user = User.new(:email => "mail@com.pl", :password => "xzc")
+      user.save
+      user.password_hash.should_not == nil
     end
 
   end
-  
-  describe "#substract" do
-  
-    it "substracts one number from another" do
-      @p.substract(5, 10).should == -5
-    end
 
+  describe "#authenticate" do
+    it "finds the user with given email and pass" do
+      user = User.new(:email => "mail@com.pl", :password => "qwerty")
+      user.save
+      User.authenticate("mail@com.pl", "qwerty").should == user
+    end
   end
-  
+
+  describe "#encrypt_password" do
+    it "encrypts password" do
+      user = User.new(:email => "mail@com.pl", :password => "wqw")
+      user.save
+      user.password_salt.should_not be_blank
+      user.password_hash.should_not be_blank
+    end
+  end
+
 end
