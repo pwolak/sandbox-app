@@ -1,21 +1,18 @@
+require "at_least_a_cent_validator"
+
 class Product < ActiveRecord::Base
+
+  # ML I updated the validations to be "Rails 3 style"
+  validates :title, :presence => true, :uniqueness => true
+  validates :description, :presence => true
+  validates :price, :numericality => true, :at_least_a_cent => true
+  validates :image_url, :presence => true, :format => {
+    :with => /\.(gif|jpg|png)$/i,
+    :message => 'must be a URL for GIF, JPG or PNG image.'
+  }
 
   def self.find_products_for_sale
     find(:all, :order => "title")
   end
-
-  validates_presence_of :title, :description, :image_url
-  validates_uniqueness_of :title
-  validates_numericality_of :price
   
-  validates_format_of :image_url, 
-    :with => %r{\.(gif|jpg|png)$}i, 
-    :message => 'must be a URL for GIF, JPG or PNG image.'
-  
-  validate :price_must_be_at_least_a_cent
-  
-protected
-  def price_must_be_at_least_a_cent
-    errors.add(:price, 'should be at least 0.01') if price.nil? || price < 0.01
-  end
 end

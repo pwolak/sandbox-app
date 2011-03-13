@@ -11,6 +11,9 @@ gem "gravatar_image_tag", "1.0.0.pre2"
 
 group :develpoment do
   gem "rspec-rails"
+  gem "interactive_editor"
+  gem "awesome_print"
+  gem "ruby-debug19"
 end
 
 

@@ -2,15 +2,12 @@ require "spec_helper"
 
 describe User do
 
-  before(:each) do
-    @valid_attributes
-  end
-  
-  describe "validates" do
+  describe "validations" do
 
     it "validates presence of password and email" do
-      valid_attributes = {:password => nil, :email => nil}
-      u = User.new(valid_attributes)
+      # ML These are in fact invalid attributes (contrary to valid attributes)
+      invalid_attributes = {:password => nil, :email => nil}
+      u = User.new(invalid_attributes)
       u.should have(1).error_on(:password)
       u.should have(1).error_on(:email)
     end
@@ -19,7 +16,7 @@ describe User do
       user1 = User.new(:email => "mailmail@com.pl", :password => "qwer")
       user1.save
       user2 = User.new(:email => "mailmail@com.pl", :password => "qwert")
-      user2.save.should be_false
+      user2.should_not be_valid
     end
 
     it "validates confirmation of password" do
@@ -28,15 +25,25 @@ describe User do
       user.should_not be_valid
     end
 
-    it "hashes password before save" do
-      user = User.new(:email => "mail@com.pl", :password => "xzc")
-      user.save
-      user.password_hash.should_not == nil
+  end
+  
+  describe "callbacks" do
+    
+    describe "before save" do
+    
+      it "hashes password" do
+        user = User.new(:email => "mail@com.pl", :password => "xzc")
+        user.save
+        user.password_hash.should_not be_nil
+      end
+    
     end
-
+    
   end
 
-  describe "#authenticate" do
+  # ML This is class method (not instance method), thus the describe text starts with
+  # a dot not a hash
+  describe ".authenticate" do
     it "finds the user with given email and pass" do
       user = User.new(:email => "mail@com.pl", :password => "qwerty")
       user.save
