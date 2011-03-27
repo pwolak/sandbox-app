@@ -1,5 +1,6 @@
-page.replace_html("cart" , :partial => "cart" , :object => @cart)
-
-if @current_item
-  page[:current_item].visual_effect :highlight, :startcolor => "#88ff88", :endcolor => "#114411"
-end
+#page.replace_html("cart" , :partial => "cart" , :object => @cart)
+page.call "$('#cart').html", render(:partial => "cart", :object => @cart)
+#
+#if @current_item
+# page[:current_item].visual_effect :highlight, :startcolor => "#88ff88", :endcolor => "#114411"
+#end
